@@ -1,0 +1,100 @@
+{% extends "base.html.twig" %}
+{% block title %}Student:: View Allocated Topic{% endblock %}
+{% block body %}
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		<div class=" sidebar" role="navigation">
+            <div class="navbar-collapse">
+				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+					<ul class="nav" id="side-menu">
+						<li>
+							<a href="{{ path('student_dashboard') }}" class="active"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
+						</li>
+						<li>
+							<a href="{{ path('student_view_topic') }}"><i class="fa fa-book nav_icon"></i>View Allocated Topic</a>
+							<!-- /nav-second-level -->
+						</li>
+						<li>
+							<a href="{{ path('student_update_data') }}"><i class="fa fa-refresh nav_icon"></i>Update Data</a>
+						</li>
+						<li>
+							<a href="{{ path('student_logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
+						</li>
+					</ul>
+					<!-- //sidebar-collapse -->
+				</nav>
+			</div>
+		</div>
+
+
+
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+		<div class="sticky-header header-section ">
+			<div class="header-left">
+				<!--toggle button start-->
+				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+				<!--toggle button end-->
+				<!--logo -->
+				<div class="logo">
+                    <a href="{{ path('student_dashboard') }}">
+                        <h1>UNDERGRADUATE PROJECT </h1>
+                        <span>TOPICS ALLOCATION SYSTEM</span>
+                    </a>
+				</div>
+				<!--//logo-->
+				<div class="clearfix"> </div>
+			</div>
+			<div class="header-right">
+			<!--notification menu end -->
+				<div class="profile_details">		
+					<ul>
+						<li class="dropdown profile_details_drop">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<div class="profile_img">	
+									<span class="prfil-img"><img src="{{ asset('img/favicon/apple-icon-60x60.png') }}" alt="logo"> </span>
+							
+								</div>	
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>				
+			</div>
+			<div class="clearfix"> </div>	
+		</div>
+		<!-- //header-ends -->
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+			<h3 class="title1">Allocated Topic</h3>
+                <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                    <div class="form-title">
+                        <h4>Topic Detail:</h4>
+                    </div>
+                    <div class="form-body">
+
+                    </div>
+                </div>
+                <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                    <div class="form-title">
+                        <h4>Supervisor's Info:</h4>
+                    </div>
+                    <div class="form-body">
+
+                    </div>
+                </div>
+
+                <!-- Display the list of approved topics here --->
+
+			
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | CSC Dept. AAUA. </p>
+		</div>
+        <!--//footer-->
+	</div>
+	{% endblock %}

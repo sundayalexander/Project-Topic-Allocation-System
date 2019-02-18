@@ -1,0 +1,169 @@
+{% extends "base.html.twig" %}
+{% block title %} Dashboard {% endblock %}
+{% block meta %}
+    {{ parent() }}
+    <meta name="keywords" content="Undergraduate Project Topics Allocation System" />
+    {% endblock %}
+{% block body %}
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		<div class="sidebar" role="navigation">
+            <div class="navbar-collapse">
+				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+					<ul class="nav" id="side-menu">
+						<li>
+							<a href="{{ path('student_dashboard') }}" class="active"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
+						</li>
+						<li>
+							<a href="{{ path('student_view_topic') }}"><i class="fa fa-book nav_icon"></i>View Allocated Topic</a>
+							<!-- /nav-second-level -->
+						</li>
+						<li>
+							<a href="{{ path('student_update_data') }}"><i class="fa fa-refresh nav_icon"></i>Update Data</a>
+						</li>
+						<li>
+							<a href="{{ path('student_logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
+						</li>
+					</ul>
+					<!-- //sidebar-collapse -->
+				</nav>
+			</div>
+		</div>
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+		<div class="sticky-header header-section ">
+			<div class="header-left">
+				<!--toggle button start-->
+				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+				<!--toggle button end-->
+				<!--logo -->
+				<div class="logo">
+					<a href="{{ path('student_dashboard') }}">
+						<h1>UNDERGRADUATE PROJECT </h1>
+						<span>TOPICS ALLOCATION SYSTEM</span>
+					</a>
+				</div>
+				<!--//logo-->
+				<div class="clearfix"> </div>
+			</div>
+			<div class="header-right">
+			<!--notification menu end -->
+				<div class="profile_details">		
+					<ul>
+						<li class="dropdown profile_details_drop">
+							<a href="{{ path('homepage') }}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<div class="profile_img">	
+									<span class="prfil-img"><img src="{{ asset('img/favicon/apple-icon-60x60.png') }}" alt="logo"> </span>
+							
+								</div>	
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>				
+			</div>
+			<div class="clearfix"> </div>	
+		</div>
+		<!-- //header-ends -->
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+				<div class="row-one"><br/><br/>
+					<div class="col-md-4 widget">
+						<div class="stats-left ">
+							<h5>Total</h5>
+							<h4>Topics</h4>
+						</div>
+						<div class="stats-right">
+							<label> {{ totalTopics }}</label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="col-md-4 widget states-mdl">
+						<div class="stats-left">
+							<h5>Allocated</h5>
+							<h4>Topics</h4>
+						</div>
+						<div class="stats-right">
+							<label>{{ allocated }} </label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="col-md-4 widget states-last">
+						<div class="stats-left">
+							<h5>Unallocated</h5>
+							<h4>Topics</h4>
+						</div>
+						<div class="stats-right">
+							<label>{{ unallocated }}</label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="clearfix"> </div>	
+				</div>
+					<br/>
+				<div class="clearfix"> </div>
+			</div><br/><br/><br/><br/>
+			<div class="row calender widget-shadow" style="text-align: center;">
+                <h3 class="title1" style="color: #F2B33F;">My Account</h3>
+                <style>
+                    .boards{
+                        display: inline-block;
+                        margin: 0px auto;
+                        text-decoration: underline;
+                        text-align: center;
+                        padding: 2em;
+                        background-color: #a5a5a5;
+                    }
+                    .boards a{
+                        color: #585858;
+                        padding: 2em;
+                    }
+                </style>
+                <div class="boards">
+                    <a href="{{ path("student_view_topic") }}">View Allocated Topic</a>
+                </div>
+                <div class="boards">
+                    <a href="{{ path('student_update_data') }}">Update Data</a>
+                </div>
+                <div class="boards">
+                    <a href="{{ path('student_logout') }}">Logout!</a>
+                </div>
+            </div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | A Genetic Programming Approach for Allocating Undergraduate Project Topics </p>
+		</div>
+        <!--//footer-->
+	</div>
+{% endblock %}
+{% block javascripts %}
+    <!-- Classie -->
+    <script src="{{ asset('control_panel/js/classie.js') }}"></script>
+    <script>
+        var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+            showLeftPush = document.getElementById( 'showLeftPush' ),
+            body = document.body;
+
+        showLeftPush.onclick = function() {
+            classie.toggle( this, 'active' );
+            classie.toggle( body, 'cbp-spmenu-push-toright' );
+            classie.toggle( menuLeft, 'cbp-spmenu-open' );
+            disableOther( 'showLeftPush' );
+        };
+
+
+        function disableOther( button ) {
+            if( button !== 'showLeftPush' ) {
+                classie.toggle( showLeftPush, 'disabled' );
+            }
+        }
+    </script>
+    <!--scrolling js-->
+    <script src="{{ asset('control_panel/js/jquery.nicescroll.js') }}"></script>
+    <script src="{{ asset('control_panel/js/scripts.js') }}"></script>
+    <!--//scrolling js-->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('control_panel/js/bootstrap.js') }}"> </script>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+{% block title %}Student::Login! {% endblock %}
+{% block body %}
+    <br />
+    <div class="container" style="height:100%">
+        <div class="row text-center ">
+            <div class="col-md-12"> <br />
+                <!-- <img style="width:105px;height:100px;" src="<?php echo WEB_URL; ?>img/upload/img.png" /> --> </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0" style="border-radius:0px;">
+                {% if registered is not null %}
+                <div style="margin-bottom:8px;padding-top:2px;"
+                     align="center" class="alert-success">Registration successful...<br />
+                    Please enter your details below to login.
+                </div>
+                {% endif %}
+                <div class="panel panel-default" id="loginBox" style="background-color: #e9e9e9;">
+                    <div class="panel-heading" style="text-align: center;
+                    background-color: #a5a5a5; border-bottom: solid 1px white;">
+                        <strong> Undergraduate Project Topics Allocation System </strong>
+                    </div>
+                    <style>
+                        label{
+                            color: #31516A;
+                            font-weight: normal;
+                        }
+                        input[type="text"], .panel-body form select{
+                            height:50px;
+                        }
+                        .panel-body form ul li{
+                            color: red;
+                            list-style: none;
+                            padding: 0em .1em;
+                            font-size: small;
+                        }
+                    </style>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+                            <br />
+                            {{ form_errors(form.matric_no) }}
+                            {{ form_errors(form) }}
+                            {{ form_label(form.matric_no) }}
+                            <div class="form-group input-group"> <span class="input-group-addon"><i class="fa fa-book"  ></i></span>
+                                {{ form_widget(form.matric_no) }}
+                            </div>
+                            {{ form_errors(form.session) }}
+                            {{ form_label(form.session) }}
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"  ></i></span>
+                                {{ form_widget(form.session) }}
+                            </div>
+                            <hr />
+                            <div align="center">
+                                <button style="width:100%;" type="submit" id="login" class="btn btn-primary" >Login</button>
+                            </div><br ><br >
+                            <div align="center">
+                                <a style="color: #31516A; text-decoration: underline;" href="{{ path('supervisor_login') }}" >Login as Supervisor</a>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function validationForm(){
+            if($("#username").val() == ''){
+                alert("Username Required !!!");
+                $("#username").focus();
+                return false;
+            }
+            else if($("#password").val() == ''){
+                alert("Password Required !!!");
+                $("#password").focus();
+                return false;
+            }
+            else if($("#ddlLoginType").val() == '-1'){
+                alert("Select Login Type !!!");
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+{% endblock %}

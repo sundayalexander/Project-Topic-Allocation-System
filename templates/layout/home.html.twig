@@ -1,0 +1,594 @@
+{% extends "base.html.twig" %}
+{% block title %} Undergraduate Project Topic Allocation System {% endblock %}
+{% block meta %}
+    <meta name="keywords" content="School Management System,management software, school portal,
+        manage student's, parent and teacher records, system, Hyschool, real time access to student performance" />
+    <meta name="description" content="This is a powerful, user friendly School Management System (SMS), that provides strong
+        interaction between parents and school managements through real time messaging and notifications. Realtime access to student
+        performance assessment">
+    <meta name="author" content="Hyschool.ng">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+{% endblock %}
+{% block stylesheets %}
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/animate/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/simple-line-icons/css/simple-line-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owl.carousel/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/magnific-popup/magnific-popup.min.css') }}">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/theme-elements.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/theme-blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/theme-display.css') }}">
+
+    <!-- Current Page CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/rs-plugin/css/settings.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/rs-plugin/css/layers.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/rs-plugin/css/navigation.css') }}">
+
+    <!-- Demo CSS -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="{{ asset('css/skin.css') }}">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+    <!-- Head Libs -->
+    <style type="text/css">
+        .gm-err-container{
+            height:100%;width:100%;
+            display:table;background-color:#e0e0e0;
+            position:relative;left:0;
+            top:0}
+        .gm-err-content{border-radius:1px;
+            padding-top:0;padding-left:10%;
+            padding-right:10%;
+            position:static;
+            vertical-align:middle;
+            display:table-cell}
+        .gm-err-content a{color:#4285f4}
+        .gm-err-icon{text-align:center}
+        .gm-err-title{margin:5px;
+            margin-bottom:20px;
+            color:#616161;
+            font-family:Roboto,Arial,sans-serif;
+            text-align:center;font-size:24px}
+        .gm-err-message{margin:5px;color:#757575;
+            font-family:Roboto,Arial,sans-serif;
+            text-align:center;font-size:12px}
+        .gm-err-autocomplete{padding-left:20px;
+            background-repeat:no-repeat;
+            background-size:15px 15px}
+    </style>
+    <script src="{{ asset('vendor/modernizr/modernizr.min.js') }}"></script>
+{% endblock %}
+{% block body %}
+
+		<div class="body">
+			<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAtElement': '#header', 'stickySetTop': '0', 'stickyChangeLogo': false}">
+				<div class="header-body">
+					<div class="header-container container-fluid px-0">
+						<div class="header-row">
+							<div class="header-column custom-divider-1">
+								<div class="header-row">
+									<div class="header-logo px-4">
+										<a href="{{ path('homepage') }}">
+											<img alt="Hyschool.ng logo" width="30" height="30" src="{{  asset('img/logo.png') }}">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="header-column justify-content-center w-100">
+								<div class="header-row">
+									<div class="header-nav justify-content-center">
+										<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
+											<nav class="wrapper-spy collapse">
+												<ul class="nav nav-pills" id="mainNav">
+													<li>
+														<a class="nav-link" href="#project-topics" data-hash data-hash-offset="32">
+															Project Topics
+														</a>
+													</li>
+											        <li>
+														<a class="nav-link" href="#overview" data-hash data-hash-offset="32">
+															Overview
+														</a>
+													</li>
+													<li>
+														<a class="nav-link" href="#contact-us" data-hash >
+															Contact Us
+														</a>
+													</li>
+												</ul>
+                                                
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="header-column custom-divider-1 _left justify-content-end">
+								<div class="header-row px-xl-4">
+									<ul class="social-icons custom-social-icons-style-1 d-none d-md-flex">
+										<li class="social-icons-facebook">
+											<a title="Login" class="text-color-quaternary" href="{{ path('student_login') }}">
+												Login
+											</a>
+										</li>
+										<li class="social-icons-twitter" style="margin: 0em 1em;">
+											<a title="Register" class="text-color-quaternary" href="{{ path('student_register') }}">
+												Register
+											</a>
+										</li>
+									</ul>
+									<button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+										<i class="fas fa-bars"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div role="main" class="main">
+
+
+				<div id="home" class="slider-container rev_slider_wrapper" style="height: 100vh;">
+					<div id="revolutionSlider" class="slider manual rev_slider" data-version="5.4.7">
+						<ul>
+							<li data-transition="fade">
+								<img src="{{ asset('img/landing-page/slides/slide-1.jpg') }}"
+									alt="hyschool.ng"
+									data-bgposition="center center"
+									data-bgfit="cover"
+									data-bgrepeat="no-repeat"
+									class="rev-slidebg">
+
+								<h1 class="tp-caption text-color-light font-weight-bold"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="center" data-voffset="-55"
+									data-start="500"
+									data-fontsize="80"
+									data-transform_in="y:[-300%];opacity:0;s:500;" style="text-shadow: 0px 4px #31516A;">
+									 Topics Allocation System
+									</h1>
+
+								<div class="tp-caption text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['-10','-10','-10','0']"
+									data-start="1500"
+									data-fontsize="['18','18','18','25']"
+									data-whitespace="nowrap"
+									data-transform_in="y:[100%];s:500;"
+									data-transform_out="opacity:0;s:500;"
+									data-mask_in="x:0px;y:0px;"><br /><br />An Undergraduate Project Topics
+									Allocation System
+									</div>
+
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['15','15','15','35']"
+									data-start="2000"
+									data-fontsize="['12','12','12','19']"
+									data-transform_in="y:[100%];opacity:0;s:500;" style="color:#fc3;">
+									<br /><br />A Genetic Programming approach for allocating undergraduate project Topics
+									</div>
+
+							</li>
+							<li data-transition="fade">
+								<img src="{{ asset('img/landing-page/slides/slide-3.jpg') }}"
+									alt="why hyschool"
+									data-bgposition="center center"
+									data-bgfit="cover"
+									data-bgrepeat="no-repeat"
+									class="rev-slidebg">
+                                    <a href="#who-we-are">
+
+								<h1 class="tp-caption text-color-light font-weight-bold"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="center" data-voffset="-55"
+									data-start="500"
+									data-fontsize="80"
+									data-transform_in="y:[-300%];opacity:0;s:500;">{{ allocated }}+ Project Topics Allocated </h1><br /><br /><br />
+
+								<div class="tp-caption text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['10','10','10','0']"
+									data-start="2000"
+									data-fontsize="['18','18','18','25']"
+									data-whitespace="nowrap"
+									data-transform_in="y:[100%];s:500;"
+									data-transform_out="opacity:0;s:500;"
+									data-mask_in="x:0px;y:0px;">Over {{ allocated }} Allocated Undergraduate Project Topics,
+									in different research domains with over {{ supervisors }} supervisors</div>
+
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['55','55','55','35']"
+									data-start="2800"
+									data-fontsize="['12','12','12','19']"
+									data-transform_in="y:[100%];opacity:0;s:500;" style="color:#fc3;">and more ...</div>
+                                    </a>
+
+							</li>
+                            <li data-transition="fade">
+								<img src="{{ asset('img/landing-page/slides/slide-4.jpg') }}"
+									alt="hyschool how it works"
+									data-bgposition="center center"
+									data-bgfit="cover"
+									data-bgrepeat="no-repeat"
+									class="rev-slidebg">
+                                    <a href="#what-we-do">
+
+								<h1 class="tp-caption text-color-light font-weight-bold"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="center" data-voffset="-55"
+									data-start="500"
+									data-fontsize="80"
+									data-transform_in="y:[-300%];opacity:0;s:500;">32+ Research Domains</h1>
+
+								<div class="tp-caption text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['-10','-10','-10','0']"
+									data-start="1500"
+									data-fontsize="['18','18','18','25']"
+									data-whitespace="nowrap"
+									data-transform_in="y:[100%];s:500;"
+									data-transform_out="opacity:0;s:500;"
+									data-mask_in="x:0px;y:0px;">Over 32 research domains e.g Machine Learning, Algorithms
+									Networking etc.
+                                    </div>
+
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['15','15','15','35']"
+									data-start="2000"
+									data-fontsize="['12','12','12','19']"
+									data-transform_in="y:[100%];opacity:0;s:500;" style="color:#fc3;">The school admin oversee all 
+                                    activities...</div>
+                                    </a>
+
+							</li>
+                            <li data-transition="fade">
+								<img src="{{ asset('img/landing-page/slides/slide-2.jpg') }}"
+									alt="hyschool mobile app"
+									data-bgposition="center center"
+									data-bgfit="cover"
+									data-bgrepeat="no-repeat"
+									class="rev-slidebg">
+                                    <a href="#mobile_platform">
+
+								<h1 class="tp-caption text-color-light font-weight-bold"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="center" data-voffset="-55"
+									data-start="500"
+									data-fontsize="80"
+									data-transform_in="y:[-300%];opacity:0;s:500;">{{ topics|length }}+ Project Topics</h1>
+
+								<div class="tp-caption text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['-10','-10','-10','0']"
+									data-start="1500"
+									data-fontsize="['18','18','18','25']"
+									data-whitespace="nowrap"
+									data-transform_in="y:[100%];s:500;"
+									data-transform_out="opacity:0;s:500;"
+									data-mask_in="x:0px;y:0px;">
+									<br />
+                                    	Over {{ topics|length }} Project Topics and Domains.
+                                    </div>
+
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['0','0','30','85']"
+									data-y="['center','center','center','center']" data-voffset="['15','15','15','35']"
+									data-start="2000"
+									data-fontsize="['12','12','12','19']"
+									data-transform_in="y:[100%];opacity:0;s:500;" style="color:#fc3;">and more ...</div>
+                                    </a>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<section id="project-topics" class="section section-no-border background-color-light m-0">
+					<div class="container">
+						<div class="row text-center center-block">
+							<div style="border-radius: 100%; border: solid .8em #ffffff;
+							height: 15em; width: 15.5em; padding: 1.8em; background-color: #a5a5a5;
+							margin: 0em auto;">
+								<h3 style="color: #ffffff;">
+								<span style="color: #31516A;">{{ topics|length }}+</span><br />
+								Total Project Topics<br/>
+								<span class="fa fa-archive" style="font-size: x-large;
+								margin-top: .4em;"></span>
+								</h3>
+							</div>
+							<div style="border-radius: 100%; border: solid .8em #ffffff;
+							height: 15em; width: 15.5em; padding: 1.8em; margin: 0em auto;">
+								<h3 style="color: #31516A;">
+								<span style="color: red;">{{ unallocated }}+</span><br/>
+								Unallocated Project Topics <br/>
+								<span class="fa fa-file-archive" style="font-size: x-large;
+								margin-top: .4em;"></span>
+								</h3>
+							</div>
+							<div style="border-radius: 100%; border: solid .8em #ffffff;
+							height: 15em; width: 15.5em; padding: 1.8em; background-color: #a5a5a5;
+							margin: 0em auto;">
+								<h3 style="color: #ffffff;">
+								<span style="color: green;">{{ allocated }}+</span><br />
+								Allocated Project Topics<br/>
+								<span class="fa fa-book" style="font-size: x-large;
+								margin-top: .4em;"></span>
+								</h3>
+							</div>
+							<div style="border-radius: 100%; border: solid .8em #ffffff;
+							height: 15em; width: 15.5em; padding: 1.8em; margin: 0em auto;">
+								<h3 style="color: #31516A;">
+								<span style="color: #7030a0;">{{ supervisors }}+</span><br/>
+								Supervisors <br/>
+								<span class="fa fa-user" style="font-size: x-large;
+								margin-top: .4em;"></span>
+								</h3>
+							</div>
+
+						</div><br/><br/>
+					</div>
+				</section>
+
+				<section class="section section-no-border background-color-tertiary m-0">
+					<div class="container">
+						<div class="row text-center">
+							<div class="col">
+								<h2 style="color: #31516A;">Project Topics</h2>
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col">
+								<div class="owl-carousel mb-0" data-plugin-options="{'items': 1, 'loop': false, 'dots': false, 'nav': false}">
+									<div class="row justify-content-center">
+											<br />
+                            <div class="form-body">
+							     <table class="table table-responsive table-striped table-hover" >
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tile</th>
+                                            <th>Domain</th>
+                                            <th>Added Date</th>
+                                            <th>Status</th>
+                                            <th>Added By</th>
+                                        </tr>
+                                    </thead>
+                                    {% set i = 0 %}
+                                    {% for topic in topics %}
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    {% set i = i+1 %}
+                                                    {{ i }}
+                                                </td>
+                                                <td>
+                                                    {{ topic.name }}
+                                                </td>
+                                                <td>
+                                                    {{ topic.domain }}
+                                                </td>
+                                                <td>
+                                                    {{ topic.addedDate.format("d-M-Y")}}
+                                                </td>
+                                                <td>
+                                                    {% if topic.allocated is null %}
+                                                        Unallocated
+                                                    {% else %}
+                                                        Allocated
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {{ topic.supervisor.title }}.
+                                                    {{ topic.supervisor.firstName }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    {% endfor %}
+
+                                </table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+                
+                
+				<section class="section section-primary section-no-border m-0" id="overview">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6 mb-5 mb-lg-0">
+								<img src="{{ asset('img/logo.png') }}" alt="hyschool mobile platform" class="img-fluid" />
+							</div>
+							<div class="col-lg-5">
+								<h2 class="text-color-light">Overview</h2>
+								<p class="custom-section-sub-title text-color-light">
+                                	This is a Project Topic Allocation System, that uses a Genetic Programing
+                                	Approach to allocate project topics to student based on their research
+                                	interest. The platform is integrated with the following features:
+                                </p>
+                                <p class="text-color-light"><span> &raquo; </span>Flexible and dynamic allocation of undergraduate project topics to
+                                student based on research interest.
+                                <br /><span> &raquo; </span>Proper documentation of available and used project topics
+                                <br /><span> &raquo; </span>Repository to all allocated and unallocated project topics.
+                                </p>
+                                <p class="text-color-light">All these at your finger tips.</p>
+								<a href="{{ path('student_login') }}" class="btn custom-btn-style-1 _color-2 text-color-light mt-4">LOGIN!</a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
+				<div id="contact-us" class="google-map m-0 custom-contact-pos">
+                	<img src="{{ asset('img/landing-page/map-dark.png') }}" alt="hyschool map" class="img-fluid" />
+                </div>
+
+				<section class="section section-no-border background-color-quaternary m-0 p-0">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6 col-lg-5 custom-contact-box custom-contact-pos background-color-quaternary">
+								<h2 class="text-color-light">Contact Us</h2>
+								<div class="feature-box feature-box-style-2 custom-feature-box-style-2 mb-4">
+									<div class="feature-box-icon">
+										<i class="icon-call-in icons text-color-secondary"></i>
+									</div>
+									<div class="feature-box-info">
+										<h6 class="mb-0 text-2">Call us</h6>
+										<a href="tel:+2348137600745" class="text-color-light text-decoration-none">+2348137600745, </a>
+									</div>
+								</div>
+								<div class="feature-box feature-box-style-2 custom-feature-box-style-2 mb-4">
+									<div class="feature-box-icon">
+										<i class=" icon-envelope icons text-color-secondary"></i>
+									</div>
+									<div class="feature-box-info">
+										<h6 class="mb-0 text-2">Email Us</h6>
+										<a href="mailto:ajayicomputer@gmail.com" class="text-color-light text-decoration-none">
+                                        	ajayicomputer@gmail.com
+                                        </a><br />
+                                        <a href="mailto:amowesunday@gmail.com" class="text-color-light text-decoration-none">
+                                        	amowesunday@gmail.com
+                                        </a>
+									</div>
+								</div>
+								<h5 class="text-color-light">SEND A MESSAGE</h5>
+								{{ form_start(form,{attr:{class:"custom-contact-form-style-1"}}) }}
+									<div class="alert alert-success d-none mt-4" id="contactSuccess">
+										<strong>Success!</strong> Your message has been sent to us.
+									</div>
+
+									<div class="alert alert-danger d-none mt-4" id="contactError">
+										<strong>Error!</strong> There was an error sending your message.
+										<span class="text-1 mt-2 d-block" id="mailErrorMessage"></span>
+									</div>
+									<style>
+									    .form-row ul li{
+									        color: red;
+									    }
+									</style>
+									<div class="form-row _divider">
+										<div class="form-group col-sm-6">
+										{{ form_errors(form.comment) }}
+											{{ form_widget(form.name) }}
+										</div>
+										<div class="form-group col-sm-6">
+										{{ form_errors(form.phone) }}
+											{{ form_widget(form.phone) }}
+										</div>
+									</div>
+									<div class="form-row">
+									{{ form_errors(form.email) }}
+										<div class="form-group col">
+											{{ form_widget(form.email) }}
+										</div>
+									</div>
+									<div class="form-row">
+									{{ form_errors(form.comment) }}
+										<div class="form-group col">
+											{{ form_widget(form.comment,{attr:{row:5}}) }}
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col">
+											<input type="submit" value="SUBMIT" class="btn btn-primary " name="submit">
+										</div>
+									</div>
+								{{ form_end(form) }}
+							</div>
+						</div>
+					</div>
+				</section>
+
+		</div>
+		<footer id="footer" class="m-0 p-0">
+			<div class="footer-copyright background-color-light">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-9 mb-1">
+							<p>© Copyright 2018. All Rights Reserved. <a href="{{ path('admin_dashboard') }}">Admin</a></p>
+						</div>
+						<div class="col-sm-3 text-sm-right">
+							<ul class="social-icons custom-social-icons-style-2">
+								<li class="social-icons-facebook">
+									<a href="http://www.facebook.com/" class="text-color-quaternary" target="_blank" title="Facebook">
+										<i class="fab fa-facebook-f"></i>
+									</a>
+								</li>
+								<li class="social-icons-twitter">
+									<a href="http://www.twitter.com/" class="text-color-quaternary" target="_blank" title="Twitter">
+										<i class="fab fa-twitter"></i>
+									</a>
+								</li>
+								<li class="social-icons-linkedin">
+									<a href="http://www.linkedin.com/" class="text-color-quaternary" target="_blank" title="Linkedin">
+										<i class="fab fa-linkedin-in"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	{% endblock %}
+  {% block javascripts %}
+
+      <!-- Vendor -->
+      <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery.appear/jquery.appear.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery-cookie/jquery-cookie.min.js') }}"></script>
+      <script src="{{ asset('vendor/popper/umd/popper.min.js') }}"></script>
+      <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+      <script src="{{ asset('vendor/common/common.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery.validation/jquery.validation.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery.gmap/jquery.gmap.min.js') }}"></script>
+      <script src="{{ asset('vendor/jquery.lazyload/jquery.lazyload.min.js') }}"></script>
+      <script src="{{ asset('vendor/isotope/jquery.isotope.min.js') }}"></script>
+      <script src="{{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+      <script src="{{ asset('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+      <script src="{{ asset('vendor/vide/vide.min.js') }}"></script>
+
+      <!-- Theme Base, Components and Settings -->
+      <script src="{{ asset('js/theme.js') }}"></script>
+
+      <!-- Current Page Vendor and Views -->
+      <script src="{{ asset('vendor/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+      <script src="{{ asset('vendor/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+
+      <!-- Current Page Vendor and Views -->
+      <script src="{{ asset('js/views/view.contact.js') }}"></script>
+
+      <!-- Demo -->
+      <script src="{{ asset('js/demos/demo-one-page-agency.js') }}"></script>
+
+      <!-- Theme Custom -->
+      <script src="{{ asset('control_panel/js/custom.js') }}"></script>
+
+      <!-- Theme Initialization Files -->
+      <script src="{{ asset('js/theme.init.js') }}"></script>
+  {% endblock %}

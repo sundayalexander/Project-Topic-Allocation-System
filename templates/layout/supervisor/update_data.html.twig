@@ -1,0 +1,174 @@
+{% extends "base.html.twig" %}
+{% block title %}Supervisor - Update Data{% endblock %}
+{% block body %}
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		<div class=" sidebar" role="navigation">
+            <div class="navbar-collapse">
+				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="{{ path('supervisor_dashboard') }}"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('supervisor_add_topic') }}"><i class="fa fa-plus nav_icon"></i>Add Topic</a>
+                            <!-- /nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="{{ path('supervisor_view_topics') }}"><i class="fa fa-book nav_icon"></i>View Topics</a>
+                            <!-- /nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="{{ path('supervisor_update_data') }}" class="active"><i class="fa fa-refresh nav_icon"></i>Update Data</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('supervisor_logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
+                        </li>
+                    </ul>
+					<!-- //sidebar-collapse -->
+				</nav>
+			</div>
+		</div>
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+		<div class="sticky-header header-section ">
+			<div class="header-left">
+				<!--toggle button start-->
+				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+				<!--toggle button end-->
+				<!--logo -->
+				<div class="logo">
+                    <a href="{{ path('supervisor_dashboard') }}">
+                        <h1>UNDERGRADUATE PROJECT </h1>
+                        <span>TOPICS ALLOCATION SYSTEM</span>
+                    </a>
+				</div>
+				<!--//logo-->
+				<div class="clearfix"> </div>
+			</div>
+			<div class="header-right">
+			<!--notification menu end -->
+				<div class="profile_details">		
+					<ul>
+						<li class="dropdown profile_details_drop">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<div class="profile_img">	
+									<span class="prfil-img"><img src="{{ asset('img/favicon/apple-icon-60x60.png') }}" alt="logo"> </span>
+							
+								</div>	
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>				
+			</div>
+			<div class="clearfix"> </div>	
+		</div>
+		<!-- //header-ends -->
+		<!-- main content start-->
+        <style>
+            .form-body .table ul li{
+                font-size: small;
+                color: red;
+            }
+        </style>
+		<div id="page-wrapper">
+			<div class="main-page">
+			<h3 class="title1" style="color: #F2B33F;">Update Data</h3>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4>Update your personal data below:</h4>
+                            {% if updated %}
+                                <div class="alert-success text-center" style="padding: 1em;">
+                                    Data updated successfully!
+                                </div>
+                            {% endif %}
+						</div>
+
+						<div class="form-body">
+                            {{ form_start(form) }}
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.title) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.first_name) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.last_name) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.phone_number) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.email) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.password) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.capacity) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button style="width:100%;" type="submit" id="update" class="btn btn-primary" >Update Data</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            {{ form_end(form) }}
+						</div>
+					</div>
+			
+			
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | CSC Dept. AAUA. </p>
+		</div>
+        <!--//footer-->
+	</div>
+    {% endblock %}
+
+    {% block javascripts %}
+        <!-- Classie -->
+        <script src="{{ asset('control_panel/js/classie.js') }}"></script>
+        <script>
+            let update = document.getElementById('update');
+            update.onclick = function(){
+                document.getElementById('student_registration_matric_no').disabled = false;
+            }
+            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+                showLeftPush = document.getElementById( 'showLeftPush' ),
+                body = document.body;
+
+            showLeftPush.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toright' );
+                classie.toggle( menuLeft, 'cbp-spmenu-open' );
+                disableOther( 'showLeftPush' );
+            };
+
+
+            function disableOther( button ) {
+                if( button !== 'showLeftPush' ) {
+                    classie.toggle( showLeftPush, 'disabled' );
+                }
+            }
+        </script>
+        <!--scrolling js-->
+        <script src="{{ asset('control_panel/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('control_panel/js/scripts.js') }}"></script>
+        <!--//scrolling js-->
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('control_panel/js/bootstrap.js') }}"> </script>
+    {% endblock %}

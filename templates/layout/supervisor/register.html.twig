@@ -1,0 +1,104 @@
+{% extends "base.html.twig" %}
+{% block title %} Supervisor::Register! {% endblock %}
+{% block body %}
+    <br />
+    <div class="container" style="height:100%">
+        <div class="row text-center ">
+            <div class="col-md-12"> <br />
+                <!-- <img style="width:105px;height:100px;" src="<?php echo WEB_URL; ?>img/upload/img.png" /> --> </div>
+        </div>
+        <style>
+            label{
+                color: #585858;
+                font-weight: normal;
+            }
+        </style>
+        <div class="row ">
+            <div class="col-4-5 center-block" style="width: 70%;">
+                <div class="panel panel-default" id="loginBox" style="background-color: #e9e9e9;">
+                    <div class="panel-heading" style="text-align: center;
+                    background-color: #a5a5a5; border-bottom: solid 1px white;">
+                        <strong> Undergraduate Project Topics Allocation System </strong>
+                    </div>
+                    <style>
+                        .panel-body .form-body ul{
+                            color: red;
+                            font-size: small;
+                        }
+                        .panel-body .form-body ul li{
+                            list-style-type: circle;
+                        }
+                    </style>
+                    <div class="panel-body">
+                        <div class="form-body">
+                               {{ form_start(form) }}
+                                    {{ form_errors(form) }}
+                                    <table class="table table-responsive">
+                                        <tr>
+                                            <td>
+                                               {{ form_row(form.title) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.first_name) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.last_name) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.phone_number) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.email) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.password) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.capacity) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button style="width:100%;" type="submit" id="login" class="btn btn-primary" >Register</button>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('supervisor_login') }}">Already registered? login here</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                {{ form_end(form) }}
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function validationForm(){
+            if($("#username").val() == ''){
+                alert("Username Required !!!");
+                $("#username").focus();
+                return false;
+            }
+            else if($("#password").val() == ''){
+                alert("Password Required !!!");
+                $("#password").focus();
+                return false;
+            }
+            else if($("#ddlLoginType").val() == '-1'){
+                alert("Select Login Type !!!");
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+{% endblock %}
