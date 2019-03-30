@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 
@@ -14,8 +15,7 @@ use \DateTime;
  * @UniqueEntity("phone_number")
  * @UniqueEntity("email")
  */
-class Supervisor
-{
+class Supervisor implements UserInterface,  \Serializable{
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -35,6 +35,14 @@ class Supervisor
      *     message="Please select a valid title")
      */
     private $title;
+
+    /**
+     * @ORM\Column(type="string",length=30)
+     * @var string
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     */
+    private $username;
 
     /**
      * @Assert\NotNull()
@@ -162,7 +170,6 @@ class Supervisor
     public function setFirstName(string $first_name): self
     {
         $this->first_name = ucfirst($first_name);
-
         return $this;
     }
 
@@ -198,7 +205,6 @@ class Supervisor
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -261,5 +267,69 @@ class Supervisor
         }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()  {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([$this->supervisor_id,$this->username,$this->email,$this->password]);
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list($this->supervisor_id,$this->username,
+            $this->email,$this->password) = unserialize($serialized);
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TopicRepository")
@@ -35,7 +36,9 @@ class Topic
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @Assert\NotNull()
+     * @ORM\ManyToOne(targetEntity="Domain", inversedBy="topics")
+     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id")
      */
     private $domain;
 
@@ -72,18 +75,6 @@ class Topic
         return $this;
     }
 
-    public function getDomain(): ?string
-    {
-        return $this->domain;
-    }
-
-    public function setDomain(string $domain): self
-    {
-        $this->domain = ucwords($domain);
-
-        return $this;
-    }
-
     public function getAddedDate(): ?\DateTime
     {
         return $this->added_date;
@@ -92,6 +83,17 @@ class Topic
     public function setAddedDate(\DateTime $added_date): self
     {
         $this->added_date = $added_date;
+
+        return $this;
+    }
+    public function getDomain(): ?Domain
+    {
+        return $this->domain;
+    }
+
+    public function setDomain(?Domain $domain): self
+    {
+        $this->domain = $domain;
 
         return $this;
     }

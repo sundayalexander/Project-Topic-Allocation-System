@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block title %}Student - Update Data{% endblock %}
+{% block title %}Admin - Add Research Domain{% endblock %}
 {% block body %}
 	<div class="main-content">
 		<!--left-fixed -navigation-->
@@ -8,17 +8,29 @@
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="{{ path('student_dashboard') }}" class="active"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
+                            <a href="{{ path('admin_dashboard') }}"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="{{ path('student_view_topic') }}"><i class="fa fa-book nav_icon"></i>View Allocated Topic</a>
+                            <a href="{{ path('admin_view_topics') }}"><i class="fa fa-bookmark nav_icon"></i>View Topics</a>
                             <!-- /nav-second-level -->
                         </li>
                         <li>
-                            <a href="{{ path('student_update_data') }}"><i class="fa fa-refresh nav_icon"></i>Update Data</a>
+                            <a href="{{ path('admin_allocate') }}" ><i class="fa fa-bookmark nav_icon"></i>Allocate Topics</a>
+                            <!-- /nav-second-level -->
                         </li>
                         <li>
-                            <a href="{{ path('student_logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
+                            <a href="{{ path('admin_research_domain') }}" class="active"><i class="fa fa-plus nav_icon"></i>Add Research Domain</a>
+                            <!-- /nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_view_students') }}"><i class="fa fa-users nav_icon"></i>View Students</a>
+                            <!-- /nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_view_supervisors') }}"><i class="fa fa-user nav_icon"></i>View Supervisors</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
                         </li>
                     </ul>
 					<!-- //sidebar-collapse -->
@@ -34,7 +46,7 @@
 				<!--toggle button end-->
 				<!--logo -->
 				<div class="logo">
-                    <a href="{{ path('student_dashboard') }}">
+                    <a href="{{ path('admin_dashboard') }}">
                         <h1>UNDERGRADUATE PROJECT </h1>
                         <span>TOPICS ALLOCATION SYSTEM</span>
                     </a>
@@ -60,23 +72,23 @@
 			</div>
 			<div class="clearfix"> </div>	
 		</div>
+		<!-- //header-ends -->
+		<!-- main content start-->
         <style>
-            .form-body .table ul li{
+            .form-body .table ul li, .title1 .form-grids .form-title h5{
                 font-size: small;
                 color: red;
             }
         </style>
-		<!-- //header-ends -->
-		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-			<h3 class="title1" style="color: #F2B33F;">Update Data</h3>
+			<h3 class="title1" style="color: #F2B33F;">Edit Topic</h3>
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
-							<h4>Update your personal data below:</h4>
-                            {% if updated %}
+							<h4>Edit project topic below:</h4>
+                            {% if added %}
                                 <div class="alert-success text-center" style="padding: 1em;">
-                                    Data updated successfully!
+                                   Research domain added successfully!
                                 </div>
                             {% endif %}
 						</div>
@@ -86,39 +98,14 @@
                                 <table class="table table-responsive">
                                     <tr>
                                         <td>
-                                            {{ form_row(form.matric_no,{attr:{disabled:"disabled"}}) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.first_name) }}
+                                            {{ form_row(form.name) }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            {{ form_row(form.session) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.last_name) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            {{ form_row(form.first_interest) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.email) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            {{ form_row(form.second_interest) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.third_interest) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button style="width:100%;" type="submit" id="update" class="btn btn-primary" >Update Data</button>
+                                            <button style="width:100%;" type="submit" id="update" class="btn btn-primary" >
+                                                <span class="fa fa-save"></span> Save
+                                            </button>
                                         </td>
                                     </tr>
                                 </table>

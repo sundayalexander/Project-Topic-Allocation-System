@@ -2,27 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Topic;
+use App\Entity\Domain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProjectTopicType extends AbstractType
+class DomainType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class,[
-                "attr"=>["placeholder" => "e.g: A Genetic Programming Approach for allocating ...",
-                    "class" => "form-control"]
+            ->add('name', TextType::class, [
+                "attr" => ["class"=>"form-control1"],
+                "label" => "Research Domain"
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Topic::class,
+            'data_class' => Domain::class,
         ]);
     }
 }

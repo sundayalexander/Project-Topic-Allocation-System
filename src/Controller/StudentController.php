@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\AllocatedTopic;
+use App\Entity\Domain;
 use App\Entity\Student;
 use App\Entity\Topic;
 use App\Form\StudentRegistration;
@@ -107,6 +108,32 @@ class StudentController extends AbstractController{
         $student = new Student();
         $student->setRegistered(new \DateTime("now"));
         $form = $this->createForm(StudentRegistration::class,$student);
+        $domains = $this->getDoctrine()->getRepository(Domain::class)->findAll();
+        $researchInterest = [];
+        foreach ($domains as $domain){
+            if(count($domain->getTopics()) > 0){
+                $researchInterest[ucwords($domain->getName())] = $domain->getName();
+            }
+        }
+        $form->add("first_interest",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "label" => "Research Interest 1:",
+            "choices" => array_merge(["--First Choice--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research interest"])]
+        ])->add("second_interest",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "label" => "Research Interest 2:",
+            "choices" => array_merge(["--Second Choice--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research interest"])]
+        ])->add("third_interest",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "label" => "Research Interest 3:",
+            "choices" => array_merge(["--Third Choice--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research interest"])]
+        ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
@@ -136,6 +163,33 @@ class StudentController extends AbstractController{
             "matric_no" => $session->get("matric_no")
         ]);
         $form = $this->createForm(StudentRegistration::class,$student);
+        $domains = $this->getDoctrine()->getRepository(Domain::class)->findAll();
+        $researchInterest = [];
+        foreach ($domains as $domain){
+            if(count($domain->getTopics()) > 0){
+                $researchInterest[ucwords($domain->getName())] = $domain->getName();
+            }
+
+        }
+        $form->add("first_interest",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "label" => "Research Interest 1:",
+            "choices" => array_merge(["--First Choice--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research interest"])]
+        ])->add("second_interest",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "label" => "Research Interest 2:",
+            "choices" => array_merge(["--Second Choice--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research interest"])]
+        ])->add("third_interest",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "label" => "Research Interest 3:",
+            "choices" => array_merge(["--Third Choice--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research interest"])]
+        ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
                 $entityManager->flush();
@@ -157,7 +211,15 @@ class StudentController extends AbstractController{
             $session->clear();
             return $this->redirectToRoute("student_login");
         }
-        return $this->render("layout/student/view_topic.html.twig");
+        $student = $this->getDoctrine()
+            ->getRepository(Student::class)
+            ->find($session->get("student_id"));
+        $allocatedTopic = $this->getDoctrine()
+            ->getRepository(AllocatedTopic::class)
+            ->findOneBy(["student"=>$student]);
+        return $this->render("layout/student/view_topic.html.twig",[
+            "allocatedTopic" => $allocatedTopic
+        ]);
     }
 
     /**

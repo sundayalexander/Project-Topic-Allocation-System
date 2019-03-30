@@ -4,20 +4,21 @@ namespace App\Controller;
 
 
 use App\Entity\AllocatedTopic;
+use App\Entity\Domain;
 use App\Entity\Supervisor;
 use App\Entity\Topic;
 use App\Form\ProjectTopicType;
 use App\Form\SupervisorRegistrationType;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use \Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -66,10 +67,10 @@ class SupervisorController extends AbstractController {
      */
     public function login(Request $request, Session $session){
         $form = $this->createFormBuilder()
-            ->add("email", EmailType::class,[
-                "attr"=>["placeholder" => "e.g: johdoe@example.com","class" => "form-control"],
-                "label" => "Email:",
-                "constraints" => [new Email(),new NotBlank(),new NotNull()]
+            ->add("username", TextType::class,[
+                "attr"=>["placeholder" => "e.g: johd.alex","class" => "form-control"],
+                "label" => "Username:",
+                "constraints" => [new NotBlank(),new NotNull()]
                 ])
             ->add("password",PasswordType::class,[
                 "attr"=>["placeholder" => "minimum of 8 characters","class" => "form-control"],
@@ -80,7 +81,7 @@ class SupervisorController extends AbstractController {
         if($form->isSubmitted() && $form->isValid()){
             $session->clear();
             $supervisor = $this->getDoctrine()->getRepository(Supervisor::class)
-                ->findOneBy(["email"=>$form->getData()["email"]]);
+                ->findOneBy(["username"=>$form->getData()["username"]]);
             if($supervisor){
                 if($supervisor->isPasswordValid($form->getData()["password"])){
                     $session->set("supervisor_id", $supervisor->getSupervisorId());
@@ -103,7 +104,6 @@ class SupervisorController extends AbstractController {
      * @Route("/supervisor/dashboard", name="supervisor_dashboard")
      * @param Session $session
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("is_granted('ROLE_SUPERVISOR')")
      */
     public function dashboard(Session $session){
         if(!$session->has("supervisor_id") && !$session->has("email")){
@@ -142,7 +142,6 @@ class SupervisorController extends AbstractController {
      * @param Request $request
      * @param Session $session
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("is_granted('ROLE_SUPERVISOR')")
      */
     public function addTopic(Request $request, Session $session){
         if(!$session->has("supervisor_id") && !$session->has("email")){
@@ -152,6 +151,17 @@ class SupervisorController extends AbstractController {
         $topic = new Topic();
         $added = false;
         $form = $this->createForm(ProjectTopicType::class,$topic);
+        $domains = $this->getDoctrine()->getRepository(Domain::class)->findAll();
+        $researchInterest = [];
+        foreach ($domains as $domain){
+            $researchInterest[ucwords($domain->getName())] = $domain;
+        }
+        $form->add("domain",ChoiceType::class,[
+            "attr" => ["class"=>"form-control1"],
+            "choices" => array_merge(["--Select Research Domain--"=>"null"],$researchInterest),
+            "constraints" => [new Choice(["choices"=>array_values($researchInterest),
+                "message"=>"Please select a valid research Domain"])]
+        ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $topic->setSupervisor($em->getRepository(Supervisor::class)->find($session->get("supervisor_id")));

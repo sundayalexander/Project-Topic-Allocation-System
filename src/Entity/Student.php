@@ -61,11 +61,25 @@ class Student
      */
     private $session;
     /**
+     * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()
      * @ORM\Column(type="string",length=50)
      */
-    private $research_interest;
+    private $first_interest;
+    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @ORM\Column(type="string",length=50)
+     */
+    private $second_interest;
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @ORM\Column(type="string",length=50)
+     */
+    private $third_interest;
     /**
      * @ORM\GeneratedValue()
      * @ORM\Column(type="datetime")
@@ -93,22 +107,6 @@ class Student
      */
     public function getSession(){
         return $this->session;
-    }
-
-    /**
-     * @param string $research_interest
-     */
-    public function setResearchInterest(string $research_interest): void
-    {
-        $this->research_interest = $research_interest;
-    }
-
-    /**
-     * @return string
-     */
-    public function getResearchInterest()
-    {
-        return $this->research_interest;
     }
 
     /**
@@ -207,5 +205,53 @@ class Student
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSecondInterest()
+    {
+        return $this->second_interest;
+    }
+
+    /**
+     * @param mixed $second_interest
+     */
+    public function setSecondInterest($second_interest): void
+    {
+        $this->second_interest = $second_interest;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstInterest()
+    {
+        return $this->first_interest;
+    }
+
+    /**
+     * @param string $first_interest
+     */
+    public function setFirstInterest(string $first_interest): void
+    {
+        $this->first_interest = $first_interest;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThirdInterest()
+    {
+        return $this->third_interest;
+    }
+
+    /**
+     * @param string $third_interest
+     */
+    public function setThirdInterest(string $third_interest): void
+    {
+        $this->third_interest = $third_interest;
     }
 }

@@ -27,6 +27,10 @@ class SupervisorRegistrationType extends AbstractType
                     "Mr." => "Mr"
                 ]
             ])
+            ->add("username",TextType::class, [
+                "attr"=>["placeholder" => "e.g: John.alex", "class" => "form-control"],
+                "label" => "Username"
+            ])
             ->add("first_name",TextType::class, [
                 "attr"=>["placeholder" => "e.g: John", "class" => "form-control"],
                 "label" => "First Name"

@@ -19,8 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class StudentRegistration extends AbstractType{
 //Class properties goes here.....
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options){
+       // $
         $builder->add("matric_no", TextType::class,[
             "attr"=>["placeholder" => "e.g: 14xxxxx","class" => "form-control"],
             'label'=>"Matric Number"
@@ -42,10 +42,6 @@ class StudentRegistration extends AbstractType{
             ->add("last_name", TextType::class,[
                 "attr"=>["placeholder" => "e.g: Doe", "class" => "form-control"],
                 "label" => "Last Name"
-            ])
-            ->add("research_interest",TextType::class,[
-                "attr"=>["placeholder" => "e.g: Machine Learning", "class" => "form-control"],
-                "label" => "Research Interest"
             ])
             ->add("email", EmailType::class,[
                 "attr"=>["placeholder" => "e.g: johndoe@gmail.com", "class" => "form-control"]

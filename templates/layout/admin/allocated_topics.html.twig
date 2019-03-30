@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block title %}Admin - View Supervisors{% endblock %}
+{% block title %}Admin - View Topics{% endblock %}
 {% block body %}
 	<div class="main-content">
 		<!--left-fixed -navigation-->
@@ -15,7 +15,7 @@
                             <!-- /nav-second-level -->
                         </li>
                         <li>
-                            <a href="{{ path('admin_allocate') }}" ><i class="fa fa-bookmark nav_icon"></i>Allocate Topics</a>
+                            <a href="{{ path('admin_allocate') }}" class="active"><i class="fa fa-bookmark nav_icon"></i>Allocate Topics</a>
                             <!-- /nav-second-level -->
                         </li>
                         <li>
@@ -27,7 +27,7 @@
                             <!-- /nav-second-level -->
                         </li>
                         <li>
-                            <a href="{{ path('admin_view_supervisors') }}" class="active"><i class="fa fa-user nav_icon"></i>View Supervisors</a>
+                            <a href="{{ path('admin_view_supervisors') }}"><i class="fa fa-user nav_icon"></i>View Supervisors</a>
                         </li>
                         <li>
                             <a href="{{ path('logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
@@ -82,11 +82,23 @@
         </style>
 		<div id="page-wrapper">
 			<div class="main-page">
-			<h3 class="title1" style="color: #F2B33F;">View Supervisors</h3>
+                {% if allocations|length > 0 %}
+			    <h3 class="title1" style="color: #F2B33F;">Allocated Project Topics </h3>
+                    {% if statics|length > 0 %}
+                        <p>Optimality: {{ statics.fitness }}%</p>
+                        <p>Total Generations: {{ statics.generation }}</p>
+                        <p>Iteration: {{ statics.iteration }}</p>
+                    {% endif %}
+                {% else %}
+                <form method="post">
+                    {#<td>#}
+                    <button style="width:100%;" type="submit" id="login" class="btn btn-primary" >Allocate Project Topics</button>
+                    {#</td>#}
+                </form>
+                {% endif %}
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
-							<h4>List of registered supervisors</h4>
-
+							<h4>List of Allocated topics</h4>
 						</div>
 						<div class="form-body">
                                 <table class="table table-responsive table-striped table-hover">
@@ -94,15 +106,14 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Tile</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Registered</th>
+                                            <th>Domain</th>
+                                            <th>Student</th>
+                                            <th>Supervisor</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     {% set i = 0 %}
-                                    {% for supervisor in supervisors %}
+                                    {% for allocation in allocations %}
                                         <tbody>
                                             <tr>
                                                 <td>
@@ -110,22 +121,19 @@
                                                     {{ i }}
                                                 </td>
                                                 <td>
-                                                    {{ supervisor.title }}
+                                                    {{ allocation.topic.name }}
                                                 </td>
                                                 <td>
-                                                    {{ supervisor.firstName }}
+                                                    {{ allocation.topic.domain.name }}
                                                 </td>
                                                 <td>
-                                                    {{ supervisor.lastName}}
+                                                    {{ allocation.student.matricNo}} ({{ allocation.student.lastName}})
                                                 </td>
                                                 <td>
-                                                    {{ supervisor.email }}
+                                                    {{ allocation.topic.supervisor.title}}. {{ allocation.topic.supervisor.firstName}} {{ allocation.topic.supervisor.lastName}}
                                                 </td>
                                                 <td>
-                                                    {{ supervisor.phoneNumber }}
-                                                </td>
-                                                <td>
-                                                    {{ supervisor.registered.format("d-M-Y") }}
+                                                    {{ allocation.allocatedDate.format("d-M-Y")}}
                                                 </td>
                                             </tr>
                                         </tbody>

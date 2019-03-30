@@ -73,7 +73,18 @@
                         <h4>Topic Detail:</h4>
                     </div>
                     <div class="form-body">
-
+						<p>
+							<strong>Title:</strong> {{ allocatedTopic.topic.name }}
+						</p>
+						<p>
+							<strong>Domain:</strong> {{ allocatedTopic.topic.domain.name }}
+						</p>
+						<p>
+							<strong>Added Date:</strong> {{ allocatedTopic.topic.addedDate.format("d-M-Y") }}
+						</p>
+						<p>
+							<strong>Allocated Date:</strong> {{ allocatedTopic.allocatedDate.format("d-M-Y") }}
+						</p>
                     </div>
                 </div>
                 <div class="form-grids row widget-shadow" data-example-id="basic-forms">
@@ -81,7 +92,18 @@
                         <h4>Supervisor's Info:</h4>
                     </div>
                     <div class="form-body">
-
+						<p>
+							<strong>Title:</strong> {{ allocatedTopic.topic.supervisor.title }}.
+						</p>
+						<p>
+							<strong>Name:</strong> {{ allocatedTopic.topic.supervisor.firstName }} {{ allocatedTopic.topic.supervisor.lastName }}
+						</p>
+						<p>
+							<strong>Email Address:</strong> {{ allocatedTopic.topic.supervisor.email }}
+						</p>
+						<p>
+							<strong>Phone Number:</strong> {{ allocatedTopic.topic.supervisor.phoneNumber }}
+						</p>
                     </div>
                 </div>
 
